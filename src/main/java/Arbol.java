@@ -133,58 +133,35 @@ class Arbol {
         }
     }
         
-    private void buscarEspecie(Nodo R, String nombreEspecie, boolean lado) {
+    private void buscarEspecie(Nodo R, String nombreEspecie, int nivel) { 
         if (R != null) {
-            if(R.especie != null && R.especie.equals(nombreEspecie)){
+            if (R.especie != null && R.especie.equals(nombreEspecie)) {
                 StringBuilder mensaje = new StringBuilder("Especie encontrada: " + R.especie + "\nPreguntas que llevaron a esta especie:\n");
-                for (int i = 0; i < preguntasRuta.length; i++) {
-                    if(preguntasRuta[i] != null){
-                       mensaje.append(" - ").append(preguntasRuta[i]).append("\n");
+                for (int i = 0; i < nivel; i++) {
+                    if (preguntasRuta[i] != null) {
+                        mensaje.append(" - ").append(preguntasRuta[i]).append("\n");
                     }
-                }
-                JOptionPane.showMessageDialog(null, mensaje.toString(), "Búsqueda de Especie", JOptionPane.INFORMATION_MESSAGE);
-                return;
-            } else if(R.pregunta != null){
-                boolean continuarBusqueda = true;
-                if (R.falso == null && R.verdadero == null) {
-                    continuarBusqueda = false;
-                }
-                if (R.falso == null){
-                    if(R.verdadero.especie != null) {
-                        if (!R.verdadero.especie.equals(nombreEspecie)){
-                            continuarBusqueda = false;
-                        }
-                    }
-                } else if (R.verdadero == null) {
-                    if(R.falso.especie != null) {
-                        if (!R.falso.especie.equals(nombreEspecie)){
-                            continuarBusqueda = false;
-                        }
-                    }
-                }
-                
-                if(R.falso != null && R.verdadero != null) {
-                    if (R.falso.especie != null && R.verdadero.especie != null) {
-                        if(!R.falso.especie.equals(nombreEspecie) && !R.verdadero.especie.equals(nombreEspecie)) {
-                            continuarBusqueda = false;
-                        }
-                    }
-                }
-                
-                if(continuarBusqueda){
-                    preguntasRuta[nivel] = R.pregunta; 
-                    nivel++;
-                } else if (lado) { 
-                    preguntasRuta[nivel-1] = null;
-                    nivel--;
-                }
-            }    
-            
-            buscarEspecie(R.falso, nombreEspecie, false);
-            buscarEspecie(R.verdadero, nombreEspecie, true);
+            }
+            JOptionPane.showMessageDialog(null, mensaje.toString(), "Búsqueda de Especie", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        if (R.pregunta != null) {  
+           
+            preguntasRuta[nivel] = "¿"+ R.pregunta + "?: " + "No";
+                      
+            // Explorar el nodo "falso"
+            buscarEspecie(R.falso, nombreEspecie, nivel + 1);
+                       
+            preguntasRuta[nivel] = "¿"+ R.pregunta + "?: " + "Sí";
+                  
+            // Explorar el nodo "verdadero"
+            buscarEspecie(R.verdadero, nombreEspecie, nivel + 1);
         }
     }
+}
 
+    
     
     private int calcularProfundidad(Nodo nodo) {
         if (nodo == null) {
@@ -278,7 +255,7 @@ class Arbol {
                 preguntasRuta = new String[100];
                 nivel=0;
                 if (especieBuscada != null && !especieBuscada.trim().isEmpty()) {
-                    buscarEspecie(raiz, especieBuscada, false);
+                    buscarEspecie(raiz, especieBuscada, nivel);
                 }
             }
         });
