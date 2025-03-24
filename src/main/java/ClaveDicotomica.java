@@ -3,10 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
-/**
- *
- * @author g
- */
+
 public class ClaveDicotomica extends javax.swing.JFrame {
     
     /**
@@ -69,9 +66,14 @@ public class ClaveDicotomica extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Arbol arbol = new Arbol();
         //Carga el Json desde el archivo
-        arbol.cargarDesdeArchivo();
-        //genera el grafo del arbol
-        arbol.toGraph();
+        try {
+            boolean cargarArchivo = arbol.cargarDesdeArchivo();
+            //genera el grafo del arbol
+            if(cargarArchivo)
+                arbol.toGraph();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }    
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

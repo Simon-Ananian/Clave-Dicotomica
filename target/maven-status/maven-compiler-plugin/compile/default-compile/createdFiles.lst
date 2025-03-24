@@ -1,6 +1,9 @@
-Arbol.class
 ClaveDicotomica.class
-ClaveDicotomica$2.class
-ClaveDicotomica$1.class
+TablaHash.class
 Arbol$1.class
 Arbol$Nodo.class
+TablaHash$ClavePreguntas.class
+Arbol.class
+TablaHash$ClaveEspecie.class
+ClaveDicotomica$2.class
+ClaveDicotomica$1.class
