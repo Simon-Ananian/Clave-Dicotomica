@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"<Unnamed>","l":"Arbol"},{"p":"<Unnamed>","l":"ClaveDicotomica"},{"p":"<Unnamed>","l":"TablaHash.ClaveEspecie"},{"p":"<Unnamed>","l":"TablaHash.ClavePreguntas"},{"p":"<Unnamed>","l":"Arbol.Nodo"},{"p":"<Unnamed>","l":"TablaHash"}];updateSearchResults();
